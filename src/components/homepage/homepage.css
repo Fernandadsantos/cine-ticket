@@ -1,0 +1,23 @@
+body{
+    background-color: #000000f5; 
+}
+
+.homepage-title{
+    color: #b5121b;
+    font-size: 70px; 
+    font-weight: 800; 
+    position: fixed;
+    padding: 20px;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: #000000d2;   
+    backdrop-filter: blur(2px);
+    z-index: 99;
+}
+
+.container-movies{
+    padding: 100px; 
+    margin-top: 40px; 
+}
+  

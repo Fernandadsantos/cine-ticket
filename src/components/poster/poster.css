@@ -1,0 +1,11 @@
+.poster-image{
+    width: 200px;
+    height: 320px;  
+    cursor: pointer; 
+    transition: transform 0.3s ease; 
+}
+
+.poster-image:hover{
+    transform: scale(1.1);
+}
+ 

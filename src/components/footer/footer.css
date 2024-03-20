@@ -1,0 +1,53 @@
+*{ 
+    text-decoration: none;   
+}
+a{
+    color: #fff;
+    transition: 0.4s; 
+}
+
+a:hover{
+    color: #e61822de;
+    transition: 0.4s; 
+}
+
+.footer{
+    background-color: #e7101b42;
+    padding: 20px;  
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    gap: 20px;
+    border-top-left-radius: 90px;
+    border-top-right-radius: 90px;
+}
+
+.author{
+    color: #fff;
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.social-media{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.social-media-logo{
+    width: 50px;
+    transition: transform 0.3s ease; 
+}
+
+.social-media-logo:hover{  
+    transform: scale(1.1);
+}
+
+.github-logo{
+    background-color: #ffffff;
+    border: none;
+    border-radius: 30px;
+    padding: 5px;
+    width: 45px;
+}
