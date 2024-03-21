@@ -1,32 +1,40 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { RootState } from '../../redux/store';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovie } from "../../redux/slicesReducers/movieSlice";  
 import { getImageRoot } from "../../api/axios";   
 import { Grid} from "@mui/material"; 
-import Poster from "../poster";
-import Footer from "../footer";
+import Poster from "../../components/poster";
+import Footer from "../../components/footer";
 import "./homepage.css";  
 
 export default function HomePage(){ 
-    const posters:[string] = [''];
-    const {movie = []} = useSelector((state: RootState) => state.movieSlice);
-    const dispatch = useDispatch<ThunkDispatch<RootState, any, AnyAction>>(); 
-
-    movie.map(movie => posters.unshift(getImageRoot() + movie["poster_path"]));
-
-    console.log(movie)
-
+    const [posters, setPosters] = useState<string[]>([]);
+    const {movie = [], loadingMovie} = useSelector((state: RootState) => state.movieSlice);
+    const dispatch = useDispatch<ThunkDispatch<RootState, any, AnyAction>>();  
+ 
+    
     useEffect(()=> {
-        dispatch(fetchMovie()); 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-  
-   
+        loadingMovies();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []) 
 
+    useEffect(()=>{
+        if(loadingMovie === 'succeeded'){
+            setPosters(movie.map(movie => { 
+                return getImageRoot() + movie["poster_path"];
+            }));  
+        }
+
+    },[movie, loadingMovie]);
+
+    const loadingMovies = async () => {
+        await dispatch(fetchMovie());  
+    }
+   
     return(
-        <div>
+        <div> 
             <h1 className="homepage-title">Filmes em cartaz</h1> 
             <div className="container-movies"> 
                 <Grid container spacing={8} justifyContent="center"   >

@@ -1,0 +1,5 @@
+.sessionsDays{
+    padding: 50px;
+    display: flex;
+    justify-content: space-around;
+}

@@ -1,13 +1,26 @@
 import React from 'react'; 
-import HomePage from './components/homepage';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import HomePage from './pages/homepage';
+import Session from './pages/session';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <HomePage/>
-    </div>
-  );
-}
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+  {
+    path: "/session",
+    element: <Session />,
+  },
+]);
 
+
+function App() {
+  
+  return(
+    <RouterProvider router={router} />
+  )
+}
+ 
 export default App;

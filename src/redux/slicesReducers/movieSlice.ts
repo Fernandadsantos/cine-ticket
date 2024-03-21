@@ -6,7 +6,8 @@ export const fetchMovie = createAsyncThunk(
     'movie/fetchMovie',
     async () => {
         const { data: { results } } = await api
-      .get("/movie/popular?api_key=1abb3e68d878be1155d781ce812f80a8&language=pt-BR") 
+      .get("/movie/popular?api_key=1abb3e68d878be1155d781ce812f80a8&language=pt-BR");
+       
         return results;
     }
 )

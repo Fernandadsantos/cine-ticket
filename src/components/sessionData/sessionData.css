@@ -1,0 +1,48 @@
+.data-conatiner{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 200px; 
+    padding: 20px 10px;
+    border-radius: 10px;
+    background-color: #3f3d3da4;
+}
+
+.day{
+    color: #fff;
+    font-size: 29px;
+}
+
+.currentDate{
+    color: #fff;
+    font-size: 19px;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+
+.time-container{
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 20px;
+}
+
+.btn-time{
+    width: 90px;
+    height: 45px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    border: 1px solid #c90c0cd5;
+    color: #c90c0cd5;
+    background-color: #f1eeeef3;
+    cursor: pointer;
+}
+
+.btn-time:active{
+    border: none;
+}
+
+.btn-time:hover{
+    color: #000;
+}

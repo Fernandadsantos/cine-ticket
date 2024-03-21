@@ -20,3 +20,8 @@ export interface MovieState {
     movie: [];
     loadingMovie: string;
 }
+
+export interface Session {
+    day: string;
+    currentDate: string;
+}
