@@ -1,15 +1,14 @@
-import React from "react";
-import './poster.css';
+ import './poster.css';  
 
 export interface PosterMovie{
-    poster_path: string;
+    poster_path: string;  
 }
 
-export default function Poster({poster_path}: PosterMovie){ 
-
+export default function Poster({poster_path }: PosterMovie){ 
+  
     return(
         <div className="poster-container">
-            <img className="poster-image" src={poster_path} alt="Poster do filme" />
+            <img className="poster-image" src={poster_path} alt="Poster do filme"  />  
         </div>
     )
 }

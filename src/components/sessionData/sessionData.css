@@ -1,16 +1,21 @@
 .data-conatiner{
     display: flex;
     flex-direction: column;
-    gap: 50px;
-    width: 200px; 
+    gap: 20px; 
     padding: 20px 10px;
     border-radius: 10px;
-    background-color: #3f3d3da4;
+    background-color: #3f3d3da4; 
+    margin: 10px; 
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
 }
 
 .day{
-    color: #fff;
-    font-size: 29px;
+    font-weight: 400;
+    font-size: 19px;
+    letter-spacing: 1px;
+    color: #fff;  
 }
 
 .currentDate{
@@ -24,7 +29,7 @@
     display: flex;
     flex-direction: column; 
     align-items: center;
-    gap: 20px;
+    gap: 20px; 
 }
 
 .btn-time{

@@ -1,9 +1,10 @@
 export interface Movie { 
+    poster: string;
     posters: [];
     adult: boolean;
     backdrop_path: string;
     genre_ids: number[];
-    id: number;
+    id: string;
     original_language: string;
     original_title: string;
     overview: string;
@@ -16,12 +17,48 @@ export interface Movie {
     vote_count: number; 
 }
 
-export interface MovieState {
-    movie: [];
-    loadingMovie: string;
+export interface Room{
+    idRoom?: string;
+    seats?: [];
+    time?: string;
 }
 
-export interface Session {
+export interface MovieState {
+    movies: [];
+    loadingMovie: string; 
+    id?: string; 
+    title?: string; 
+    overview?: string;
+    poster_path?: string;
+}
+
+export interface SessionDetails{
     day: string;
-    currentDate: string;
+    currentDate: string; 
+    selectedTime?: string;  
+    timeSessionOne: string;
+    timeSessionTwo: string;
+    movieTitle?: string;
+}
+
+export interface Session{
+    idRoom?: string;
+    idMovie?: string;
+    title?: string;
+    time?: string;
+    day?: string;
+    date?: Date;
+}
+ 
+export interface MovieDetails{
+    idMovie?: string;
+    title: string;
+    poster: string;
+    overview: string;
+}
+
+export interface Schedules {
+    time?: number;
+    id?: string;
+    avaliable?: boolean;
 }

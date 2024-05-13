@@ -1,0 +1,23 @@
+.header-container{ 
+    width: 100%;
+    background-color: #27262671;
+    backdrop-filter: blur(2px);
+    display: flex; 
+    justify-content: space-evenly;
+    padding: 10px 20px;
+    position: fixed;
+    z-index: 99; 
+}
+
+.header{ 
+    font-size: 17px;
+    color: #fff;   
+    transition: 0.4s; 
+    cursor: pointer;
+}
+
+.header:hover{ 
+    color: #e61822de;
+    transition: 0.4s; 
+}
+ 
