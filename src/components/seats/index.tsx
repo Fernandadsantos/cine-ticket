@@ -1,7 +1,4 @@
-import { addDoc, collection, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase';
-import './seats.css';
-import { useEffect, useState } from 'react';
+import './seats.css'; 
 
 export default function Seats(){
      

@@ -1,38 +1,26 @@
 import { useLocation } from 'react-router-dom';
 import SessionData from '../../components/sessionData'; 
 import { useEffect, useState } from 'react';
-import { MovieDetails} from '../../interfaces';
+import { MovieDetails } from '../../interfaces';
 import Header from '../../components/header';
-import Footer from '../../components/footer';
-import './session.css'; 
+import Footer from '../../components/footer'; 
+import './session.css';  
+import { useSelector } from 'react-redux'; 
+import { RootState } from '../../redux/store';
 
-export default function Session(){
+export default function Session(){ 
     const params = useLocation();
-    const [currentMovie, setCurrentMovie] = useState<MovieDetails>(); 
-
+    const [currentMovie, setCurrentMovie] = useState<MovieDetails>();  
+    const {rooms = [] } = useSelector((state: RootState) => state.roomSlice);  
+ 
+    
     useEffect(() => {
-        if(params?.state){ 
-            const {state: {title, poster, overview}} = params; 
-            setCurrentMovie({title, poster, overview}); 
+        if(params?.state){  
+            const {state: { idMovie, title, poster, overview}} = params; 
+            setCurrentMovie({idMovie, title, poster, overview});   
         }
     },[params]);
-
-    const formatDate = (position: number) => {
-        const date = new Date();
-        date.setDate(date.getDate()+position); 
-        var day = `${date.getDate()}`;
-        var mouth  = `${date.getMonth()}`;
-
-        if(day.length === 1 ){
-            day = `0${day}`
-        }
-
-        if(mouth.length === 1 ){
-            mouth = `0${mouth}`
-        }
-
-        return `${day}/${mouth}`;
-    } 
+   
 
     return(
         <div>
@@ -48,13 +36,7 @@ export default function Session(){
                         </p> 
                     </div>
                     <div className='sessionsDays'> 
-                        <SessionData day='Domingo' currentDate={formatDate(0)} timeSessionOne='14:00' timeSessionTwo='19:00' movieTitle={currentMovie?.title}/>
-                        <SessionData day='Segunda-feira' currentDate={formatDate(1)} timeSessionOne='14:00' timeSessionTwo='19:00' movieTitle={currentMovie?.title}/>
-                        <SessionData day='Terça-feira' currentDate={formatDate(2)} timeSessionOne='14:00' timeSessionTwo='19:00' movieTitle={currentMovie?.title}/>
-                        <SessionData day='Quarta-feira' currentDate={formatDate(3)} timeSessionOne='14:00' timeSessionTwo='19:00' movieTitle={currentMovie?.title}/>
-                        <SessionData day='Quinta-feira' currentDate={formatDate(4)} timeSessionOne='14:00' timeSessionTwo='19:00' movieTitle={currentMovie?.title}/>
-                        <SessionData day='Sexta-feira' currentDate={formatDate(5)} timeSessionOne='14:00' timeSessionTwo='19:00' movieTitle={currentMovie?.title}/>
-                        <SessionData day='Sábado' currentDate={formatDate(6)} timeSessionOne='14:00' timeSessionTwo='19:00' movieTitle={currentMovie?.title}/>
+                        <SessionData rooms={rooms} movieTitle={currentMovie?.title}/> 
                     </div>
                 </div> 
             </main> 

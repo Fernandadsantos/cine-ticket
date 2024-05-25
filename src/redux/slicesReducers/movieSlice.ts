@@ -1,100 +1,75 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { api, getImageRoot } from "../../api/axios";
-import { Movie, MovieDetails, MovieState, Schedules } from "../../interfaces";
 import { addDoc, collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase"; 
- 
+import { db } from "../../firebase";
+import { Movie, MovieDetails, MovieState } from "../../interfaces";
 
+export const fetchMovie = createAsyncThunk("movie/fetchMovie", async () => {
+  const { empty, docs } = await getDocs(collection(db, "movies"));
 
-export const fetchMovie = createAsyncThunk(
-    'movie/fetchMovie',
-    async () => { 
-        const { empty, docs } = await getDocs(collection(db, "movies"));
-        
-        const getAvaliableTime = () => {
-            const start = 9;
-            const end = 23;
-            const schedules = [];
+  if (!empty && docs.length <= 20) {
+    return docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  }
 
-            for(let i = start; i <= end; i+=2){
-                let currentTime = new Date(i);
-                schedules.push({
-                   'time': `${currentTime.getHours()}:${currentTime.getMinutes()}` ,
-                   'avaliable': true,
-                   'idMovie': ''
-                }); 
-            }
+  const {
+    data: { results },
+  } = await api.get(
+    "/movie/popular?api_key=1abb3e68d878be1155d781ce812f80a8&language=pt-BR"
+  );
 
-            return schedules;
-        };
-        const schedules = getAvaliableTime(); 
+  const movies: Movie[] = results;
 
-        if(!empty){
-            docs.map((doc) => ({ ...doc.data(), id: doc.id}))
-            .forEach(doc => {
-                schedules.forEach(schedule => {
-                    //schedule.idMovie = doc.idMovie;
-                    schedule.avaliable = false; 
-                    console.log(schedule)  
-                });
-            });  
-        }
-        
-        const { data: { results } } = await api
-        .get("/movie/popular?api_key=1abb3e68d878be1155d781ce812f80a8&language=pt-BR");
-        
-        const movies = results.map((movie: Movie) => ({ 
-            idMovie: movie.id,
-            title: movie.title,
-            poster: getImageRoot() + movie.poster_path,
-            overview: movie.overview,
-        }))
-        
-        for (const movie of movies) {  
-            await addMovie(movie);
-            
-        }
+  const formattedMovies = movies.map((movie: Movie, index, array) => {
+    return {
+      id: movie.id,
+      title: movie.title,
+      poster: getImageRoot() + movie.poster_path,
+      overview: movie.overview,
+    };
+  });
 
-        return movies;
-    }
-);
+  for (const movie of formattedMovies) {
+    await addMovie(movie as MovieDetails);
+  }
+
+  return formattedMovies;
+});
 
 const addMovie = async (movie: MovieDetails) => {
-    try {
-        const docRef = await addDoc(collection(db, "movies"), movie);
-        console.log("Document written with ID: ", docRef);
-    } catch (e) {
-        console.error("Error adding document: ", e);
-    }
-}; 
+  try {
+    const docRef = await addDoc(collection(db, "movies"), movie);
+    console.log("Document written with ID: ", docRef);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+};
+
 const initialState: MovieState = {
-    movies: [],
-    loadingMovie: 'idle',
-} 
+  movies: [],
+  loadingMovie: "idle",
+};
 
 export const movieSlice = createSlice({
-    name: 'movie',
-    initialState,
-    reducers: {  
+  name: "movie",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchMovie.fulfilled, (state, action) => {
+        state.movies = action.payload as Movie[];
+        state.loadingMovie = "succeeded";
+      })
 
-    },
-    extraReducers: (builder) => {
-        builder
-            .addCase(fetchMovie.fulfilled, (state, action) => { 
-                state.movies = action.payload;
-                state.loadingMovie = 'succeeded'; 
-            })
+      .addCase(fetchMovie.pending, (state) => {
+        state.movies = [];
+        state.loadingMovie = "pending";
+      })
 
-            .addCase(fetchMovie.pending, (state) => {
-                state.movies = [];
-                state.loadingMovie = 'pending';
-            })
+      .addCase(fetchMovie.rejected, (state) => {
+        state.movies = [];
+        state.loadingMovie = "failed";
+      });
+  },
+});
 
-            .addCase(fetchMovie.rejected, (state) => {
-                state.movies = [];
-                state.loadingMovie = 'failed';
-            })
-    },
-})
- 
 export default movieSlice.reducer;
