@@ -17,14 +17,15 @@ body{
 .details{  
     margin-top: 30px;
     display: flex; 
+    align-items: center; 
 }
 
 .container{
     margin-top: 30px;   
     gap: 20px ;
     margin-bottom: 50px;
-    width: 20%;
-    padding-right: 20px;
+    width: 35%;
+    padding-right: 10px;
 }
 .subtitle{
     color: #a32121;

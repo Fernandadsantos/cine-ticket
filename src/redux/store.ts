@@ -1,11 +1,13 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 import movieSlice from "./slicesReducers/movieSlice";
 import roomSlice from "./slicesReducers/roomSlice";
+import dateSlice from "./slicesReducers/dateSlice";
 
 export const store = configureStore({
   reducer: {
     movieSlice,
     roomSlice,
+    dateSlice,
   },
 });
 

@@ -48,7 +48,7 @@ export const fetchRooms = createAsyncThunk(
         currentMovie === 19 ? (currentMovie = 0) : (currentMovie += 1);
       }
 
-      await addRoom(room.id as string, aux as RoomSchedule[]);
+      await addRoom(room.idMovie as string, aux as RoomSchedule[]);
     }
 
     return rooms;
@@ -82,7 +82,7 @@ const initialState: RoomState = {
   loadingMovie: "idle",
 };
 
-export const movieSlice = createSlice({
+export const roomSlice = createSlice({
   name: "rooms",
   initialState,
   reducers: {},
@@ -105,4 +105,4 @@ export const movieSlice = createSlice({
   },
 });
 
-export default movieSlice.reducer;
+export default roomSlice.reducer;

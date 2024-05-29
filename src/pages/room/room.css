@@ -1,0 +1,46 @@
+.room{ 
+    padding: 40px 30px;
+    margin:  0 auto;
+}
+
+.room_details{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-around;
+    align-items: center;
+}
+
+.infos_session{ 
+    padding: 20px; 
+} 
+.page_title{ 
+    margin-top: 30px;
+    font-size: 80px;
+    color: #a32121;   
+}
+
+.div_format{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 800; 
+    color: rgba(255, 255, 255, 0.664);
+}
+
+.dayLogo{
+    background-color: #23211E; 
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.svg_time{  
+    background-color: #23211E; 
+    border-radius: 10px;
+    width: 40px;
+    fill: none;  
+}

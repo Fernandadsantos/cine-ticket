@@ -1,14 +1,14 @@
- import './poster.css';  
+import { PosterSettings } from "../../interfaces";
+import "./poster.css";
 
-export interface PosterMovie{
-    poster_path: string;  
-}
-
-export default function Poster({poster_path }: PosterMovie){ 
-  
-    return(
-        <div className="poster-container">
-            <img className="poster-image" src={poster_path} alt="Poster do filme"  />  
-        </div>
-    )
+export default function Poster({ poster_path, staticMode }: PosterSettings) {
+  return (
+    <div className="poster-container">
+      <img
+        className={staticMode ? "poster-image-static" : "poster-image"}
+        src={poster_path}
+        alt="Poster do filme"
+      />
+    </div>
+  );
 }

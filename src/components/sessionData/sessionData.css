@@ -1,13 +1,14 @@
-.data-conatiner{
+.data-container{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content:space-evenly;
-    gap: 20px; 
-    padding: 20px 10px;
+    align-items: center;
+    gap: 20px;  
+    padding: 20px;
     border-radius: 10px;
     background-color: #3f3d3da4;  
-    width: 90%;
-    height: 50%;
+    width: 80%; 
+    height: 60%;
     overflow: hidden;
 }
 
@@ -18,13 +19,20 @@
     letter-spacing: 1px;
     color: #fff;  
 }
+
+.roomSession{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
  
 
-.time-container{
+.time-container{   
     display: flex;
-    flex-direction: column; 
-    align-items: center;
-    gap: 20px; 
+    flex-wrap: wrap; 
+    padding: 30px 0;
+    white-space: pre-wrap;
+    width: 100%;
 }
 
 .btn-time{
@@ -45,4 +53,10 @@
 
 .btn-time:hover{
     color: #000;
+}
+
+.sessionData-container{ 
+    display: flex;  
+    padding: 0 40px 20px 0;
+    align-items: center;
 }

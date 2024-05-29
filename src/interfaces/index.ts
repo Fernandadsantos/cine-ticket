@@ -29,6 +29,9 @@ export interface MovieState {
 export interface SessionDetails {
   rooms?: Room[];
   movieTitle?: string;
+  idMovie?: string;
+  idRoom?: string;
+  schedules?: string;
 }
 
 export interface Session {
@@ -58,11 +61,35 @@ export interface RoomSchedule {
 }
 
 export interface Room {
+  idRoom?: string;
   id?: string;
+  idMovie?: string;
   schedules?: RoomSchedule[];
 }
 
 export interface RoomState {
   rooms: Room[];
   loadingMovie: string;
+}
+
+export interface FormatDate {
+  weekDay?: string;
+  day_month?: string;
+}
+
+export interface DateState {
+  availableDate: FormatDate[];
+}
+
+export interface SeatParams {
+  idMovie: string;
+  title: string;
+  date: FormatDate[];
+  idRoom: string;
+  schedule: string;
+}
+
+export interface PosterSettings {
+  poster_path: string;
+  staticMode: boolean;
 }
