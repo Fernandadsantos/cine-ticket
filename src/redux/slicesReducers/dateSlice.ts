@@ -10,7 +10,6 @@ export const dateSlice = createSlice({
   initialState,
   reducers: {
     formatDate: (state) => {
-      console.log("dispatch ok");
       const days = [
         "Domingo",
         "Segunda-Feira",

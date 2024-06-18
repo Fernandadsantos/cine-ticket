@@ -47,8 +47,8 @@ export const fetchRooms = createAsyncThunk(
 
         currentMovie === 19 ? (currentMovie = 0) : (currentMovie += 1);
       }
-
-      await addRoom(room.idMovie as string, aux as RoomSchedule[]);
+      console.log("idRoom", room);
+      await addRoom(room.id as string, aux as RoomSchedule[]);
     }
 
     return rooms;
@@ -58,6 +58,7 @@ export const fetchRooms = createAsyncThunk(
 const addRoom = async (idRoom: string, schedules: RoomSchedule[]) => {
   const docRef = doc(db, "rooms", `${idRoom}`);
   try {
+    console.log("entrou na função db", idRoom, schedules);
     const response = await getDoc(docRef);
 
     if (response.exists()) {

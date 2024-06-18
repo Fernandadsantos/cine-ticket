@@ -17,7 +17,6 @@ export default function HomePage() {
   const [moviesList, setMoviesList] = useState<Movie[]>([]);
   const dispatch = useDispatch<ThunkDispatch<RootState, any, AnyAction>>();
   const navigate = useNavigate();
-
   const loadingMovies = async () => {
     await dispatch(fetchMovie());
     await dispatch(fetchRooms(movies as Movie[]));

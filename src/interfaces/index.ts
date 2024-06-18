@@ -53,11 +53,13 @@ export interface MovieDetails {
 export interface Schedules {
   schedulesList: number[];
   idMovie?: string;
+  seats?: SeatsInterface;
 }
 
 export interface RoomSchedule {
   idMovie?: string;
   schedule?: string;
+  seats?: SeatsInterface[];
 }
 
 export interface Room {
@@ -89,7 +91,23 @@ export interface SeatParams {
   schedule: string;
 }
 
+export interface SeatsInterface {
+  seat: number;
+  line: string;
+  status: string;
+}
+
+export interface SeatsState {
+  seats: SeatsInterface[];
+  loadingSeat: string;
+}
+
 export interface PosterSettings {
   poster_path: string;
   staticMode: boolean;
+}
+
+export interface RoomParams {
+  seats: SeatsInterface[];
+  movies: Movie[];
 }

@@ -15,7 +15,7 @@ const filterSchedules = (rooms: Room[], idMovie: string) => {
       (schedule) => schedule.idMovie === idMovie
     );
     schedulesToCurrentMovie.push({
-      idRoom: room.id,
+      idRoom: room.id as string,
       schedules: schedule,
     });
   }
@@ -55,6 +55,8 @@ export default function Session({
     rooms as Room[],
     idMovie as string
   );
+
+  console.log("sche", schedulesToCurrentMovie);
 
   useEffect(() => {
     if (availableDate.length === 0) dispatch(formatDate());
