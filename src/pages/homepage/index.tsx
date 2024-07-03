@@ -4,22 +4,23 @@ import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovie } from "../../redux/slicesReducers/movieSlice";
-import { Grid } from "@mui/material";
+import { Grid, Skeleton } from "@mui/material";
 import Header from "../../components/header";
 import Poster from "../../components/poster";
-import Footer from "../../components/footer";
 import { Movie } from "../../interfaces";
-import { fetchRooms } from "../../redux/slicesReducers/roomSlice";
 import "./homepage.css";
 
 export default function HomePage() {
-  const { movies = [] } = useSelector((state: RootState) => state.movieSlice);
+  const { movies = [], loadingMovie } = useSelector(
+    (state: RootState) => state.movieSlice
+  );
   const [moviesList, setMoviesList] = useState<Movie[]>([]);
   const dispatch = useDispatch<ThunkDispatch<RootState, any, AnyAction>>();
   const navigate = useNavigate();
+  const skeletonArray: number[] = Array.from({ length: 20 }, (v, k) => k);
+
   const loadingMovies = async () => {
     await dispatch(fetchMovie());
-    await dispatch(fetchRooms(movies as Movie[]));
   };
   useEffect(() => {
     loadingMovies();
@@ -52,9 +53,24 @@ export default function HomePage() {
         <h1 className="homepage-title">Filmes em cartaz</h1>
         <div className="containerMovies">
           <Grid container spacing={8} justifyContent="center">
-            {
-              // eslint-disable-next-line array-callback-return
-              moviesList &&
+            {loadingMovie !== "succeeded"
+              ? skeletonArray.map((e) => {
+                  return (
+                    <Grid item>
+                      <div>
+                        <Skeleton
+                          className="skeleton-poster"
+                          variant="rounded"
+                          width={200}
+                          height={320}
+                          animation="wave"
+                          sx={{ bgcolor: "grey.900" }}
+                        />
+                      </div>
+                    </Grid>
+                  );
+                })
+              : moviesList &&
                 moviesList.map((movie: Movie) => {
                   if (movie.poster !== "") {
                     return (
@@ -77,12 +93,10 @@ export default function HomePage() {
                       </Grid>
                     );
                   }
-                })
-            }
+                })}
           </Grid>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

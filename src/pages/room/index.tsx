@@ -1,26 +1,61 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { SeatParams, SeatsInterface } from "../../interfaces";
+import { Button } from "@mui/material";
+import { RootState } from "../../redux/store";
+import ComponentSeats from "../../components/ComponentSeats";
 import Header from "../../components/header";
-import { SeatParams } from "../../interfaces";
 import "./room.css";
-import Seats from "../../components/seats";
+import { useSelector } from "react-redux";
 
 export default function Room() {
   const params = useLocation();
   const [currentSessionDetails, setCurrentSessionDetails] =
     useState<SeatParams>();
+  const [disabledButton, setDisabledButton] = useState<boolean>(true);
+  const { chairs = [] } = useSelector((state: RootState) => state.chairsSlice);
 
   useEffect(() => {
     if (params?.state) {
       const {
-        state: { idMovie, title, date, idRoom, schedule },
+        state: { idMovie, title, date, idRoom, schedule, seats },
       } = params;
-      setCurrentSessionDetails({ idMovie, title, date, idRoom, schedule });
+      setCurrentSessionDetails({
+        idMovie,
+        title,
+        date,
+        idRoom,
+        schedule,
+        seats,
+      });
     }
   }, [params]);
+
   const currentDay = currentSessionDetails?.date[0];
   const currentDate = `${currentSessionDetails?.date[1]}`;
   const dayLogo = `${currentDate[0]}${currentDate[1]} `;
+  const seats: SeatsInterface[] =
+    currentSessionDetails?.seats as SeatsInterface[];
+
+  const letters = seats
+    // eslint-disable-next-line array-callback-return
+    ?.filter((seat, index, array) => {
+      if (
+        (index + 1 < array.length && seat.line !== array[index + 1].line) ||
+        index === array.length - 1
+      ) {
+        return seat?.line;
+      }
+    })
+    .map((seat) => seat?.line);
+
+  useEffect(() => {
+    if (chairs.length === 0) {
+      setDisabledButton(true);
+    } else {
+      setDisabledButton(false);
+    }
+  }, [chairs]);
 
   return (
     <div>
@@ -29,7 +64,7 @@ export default function Room() {
         <h1 className="page_title">Escolha seu assento</h1>
         <div className="room_details">
           <div className="infos_session">
-            <h2 className="">{currentSessionDetails?.title}</h2>
+            <h2>{currentSessionDetails?.title}</h2>
             <div className="div_format">
               <p className="dayLogo">{dayLogo}</p>
               <p>
@@ -53,7 +88,43 @@ export default function Room() {
               <p>{currentSessionDetails?.schedule}</p>
             </div>
           </div>
-          <Seats />
+          <div className="wrapper">
+            <div className="seats">
+              <div className="queue">
+                {letters &&
+                  letters?.map((letter) => {
+                    return <p className="letter">{letter}</p>;
+                  })}
+              </div>
+              <div>
+                <ComponentSeats
+                  seats={seats ? seats : []}
+                  letters={letters?.join("")}
+                />
+              </div>
+              <div className="queue">
+                {letters &&
+                  letters?.map((letter) => {
+                    return <p className="letter">{letter}</p>;
+                  })}
+              </div>
+            </div>
+            <div className="screen-box">
+              <p className="screen-label">Tela</p>
+              <span className="screen"></span>
+            </div>
+            <div className="seats-exemple">
+              <div className="available-seat-exemple"></div>
+              <p>Disponível</p>
+              <div className="unAvailable-seat-exemple"></div>
+              <p>Indisponível</p>
+            </div>
+          </div>
+        </div>
+        <div className="btn-continue">
+          <Button disabled={disabledButton} variant="contained" size="large">
+            Comprar
+          </Button>
         </div>
       </main>
     </div>

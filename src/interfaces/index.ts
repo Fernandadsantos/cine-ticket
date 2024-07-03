@@ -53,7 +53,8 @@ export interface MovieDetails {
 export interface Schedules {
   schedulesList: number[];
   idMovie?: string;
-  seats?: SeatsInterface;
+  seats?: SeatsInterface[];
+  schedule?: string;
 }
 
 export interface RoomSchedule {
@@ -62,16 +63,21 @@ export interface RoomSchedule {
   seats?: SeatsInterface[];
 }
 
+export interface ObjectRoomSchedule {
+  object: RoomSchedule;
+}
+
 export interface Room {
   idRoom?: string;
   id?: string;
   idMovie?: string;
   schedules?: RoomSchedule[];
+  seats?: SeatsInterface;
 }
 
 export interface RoomState {
   rooms: Room[];
-  loadingMovie: string;
+  loadingRooms: string;
 }
 
 export interface FormatDate {
@@ -89,17 +95,21 @@ export interface SeatParams {
   date: FormatDate[];
   idRoom: string;
   schedule: string;
+  seats: SeatsInterface[];
 }
 
 export interface SeatsInterface {
-  seat: number;
-  line: string;
-  status: string;
+  seat?: number;
+  line?: string;
+  status?: string;
 }
 
-export interface SeatsState {
-  seats: SeatsInterface[];
-  loadingSeat: string;
+export interface Seats {
+  seats?: SeatsInterface[];
+}
+
+export interface Chairs {
+  chairs?: SeatsInterface[];
 }
 
 export interface PosterSettings {

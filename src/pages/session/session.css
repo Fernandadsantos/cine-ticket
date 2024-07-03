@@ -1,42 +1,39 @@
 body{   
-    color: #fff;  
+    color: #fff;   
 }
 .session{
     display: flex;
-    flex-direction: column; 
-    align-items: center;  
-    overflow: hidden;   
-    padding: 40px 30px; 
-    height: calc(100vh - 133px);  
+    flex-direction: column;   
+    align-items: center;
+    overflow: hidden;    
+    padding-top: 40px;
+    height: calc(100vh - 115px);  
 }
 
 ::-webkit-scrollbar {  
     width: 0;
 }
 
-.details{  
-    margin-top: 30px;
-    display: flex; 
-    align-items: center; 
+.details{    
+    display: flex;  
+    align-items: center;  
+    justify-content: center;
+}
+  
+.container{ 
+    width: 35%; 
+    margin: 0 20px;  
 }
 
-.container{
-    margin-top: 30px;   
-    gap: 20px ;
-    margin-bottom: 50px;
-    width: 35%;
-    padding-right: 10px;
-}
 .subtitle{
     color: #a32121;
 } 
 
-.sessionsDays{ 
-    width: 80%;
-    padding: 20px;
+.sessionsDays{   
     display:flex;
-    justify-content: space-around; 
-    overflow: hidden;
+    justify-content:  center; 
+    overflow: hidden; 
+    width: 72%;
 }
 
 .movieTitle{

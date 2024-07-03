@@ -12,3 +12,9 @@ body{
     color: #a32121;
 }
   
+.skeleton-poster{
+    width: 200px;
+    height: 320px;  
+    border-radius: 10px;
+    cursor: pointer;
+}
