@@ -4,6 +4,7 @@ import HomePage from "./pages/homepage";
 import Session from "./pages/session";
 import Room from "./pages/room";
 import "./App.css";
+import Ticket from "./pages/ticket";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: "/session/room",
     element: <Room />,
+  },
+  {
+    path: "/session/room/ticket",
+    element: <Ticket />,
   },
 ]);
 

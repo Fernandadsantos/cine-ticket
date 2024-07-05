@@ -103,7 +103,7 @@ export default function Session({ idMovie, movieTitle }: SessionDetails) {
   }, [availableDate]);
 
   const skeletonArray: number[] = Array.from({ length: 6 }, (v, k) => k);
-  console.log(skeletonArray);
+
   return (
     <div className="data-container">
       <div className="time-container">
@@ -130,10 +130,6 @@ export default function Session({ idMovie, movieTitle }: SessionDetails) {
 
                 {schedulesToCurrentMovie?.map((room: Room) => {
                   if (room.schedules?.length !== 0) {
-                    console.log(
-                      "schedulesToCurrentMovie",
-                      schedulesToCurrentMovie
-                    );
                     return (
                       <div className="roomSession">
                         <h3>Sala {room.idRoom}</h3>

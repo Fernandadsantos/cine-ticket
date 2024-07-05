@@ -1,21 +1,19 @@
-import { useSelector } from "react-redux";
 import { SeatsInterface } from "../../interfaces";
-import {
-  addChairs,
-  removeChairs,
-} from "../../redux/slicesReducers/chairsSlice";
-import { RootState } from "../../redux/store";
+import Seat from "../seat";
 import "./componentSeats.css";
 
 export default function ComponentSeats({
   seats,
   letters,
+  chairs,
+  setChairs,
 }: {
   seats: SeatsInterface[];
   letters: string;
+  chairs: SeatsInterface[];
+  setChairs: React.Dispatch<React.SetStateAction<SeatsInterface[]>>;
 }) {
   const listOfChairs: [SeatsInterface][] = [];
-  const { chairs = [] } = useSelector((state: RootState) => state.chairsSlice);
 
   if (letters) {
     for (let i = 0; i < letters.length; i++) {
@@ -28,25 +26,16 @@ export default function ComponentSeats({
   }
 
   const handleChange = (row: SeatsInterface) => {
-    const btnSeat = document.querySelector(`[id='${row.line}/${row.seat}']`);
-    const btnBuy = document.querySelector(".btn-continue");
+    const selectedChairs = chairs.some((chair) => chair.seat === row.seat);
 
-    if (btnSeat?.classList.contains("selected")) {
-      btnSeat?.classList.remove("selected");
-      btnBuy?.classList.add("btn-continue-active");
-    } else {
-      btnSeat?.classList.add("selected");
-    }
-
-    const selectedChairs = chairs.find((chair) => chair === row);
-    console.log("selectedChairs", selectedChairs);
     if (selectedChairs) {
-      removeChairs(row);
-    } else {
-      addChairs(row);
-    }
+      const filteredChairs = chairs.filter((chair) => chair !== row);
 
-    console.log("chairs", chairs);
+      setChairs(filteredChairs);
+    } else {
+      const chairAdded = [...chairs, row];
+      setChairs(chairAdded);
+    }
   };
 
   return (
@@ -57,17 +46,7 @@ export default function ComponentSeats({
             <div className="row">
               {list.map((row) => {
                 if (row.status === "available") {
-                  return (
-                    <div>
-                      <button
-                        className={`seat ${row.status}`}
-                        id={`${row.line}/${row.seat}`}
-                        onClick={() => handleChange(row)}
-                      >
-                        {row.seat}
-                      </button>
-                    </div>
-                  );
+                  return <Seat handleChange={handleChange} row={row} />;
                 }
                 return (
                   <div

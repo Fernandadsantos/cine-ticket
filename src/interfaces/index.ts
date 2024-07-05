@@ -121,3 +121,8 @@ export interface RoomParams {
   seats: SeatsInterface[];
   movies: Movie[];
 }
+
+export interface SeatProps {
+  handleChange: Function;
+  row: SeatsInterface;
+}

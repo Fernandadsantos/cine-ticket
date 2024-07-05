@@ -2,18 +2,16 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { SeatParams, SeatsInterface } from "../../interfaces";
 import { Button } from "@mui/material";
-import { RootState } from "../../redux/store";
 import ComponentSeats from "../../components/ComponentSeats";
 import Header from "../../components/header";
 import "./room.css";
-import { useSelector } from "react-redux";
 
 export default function Room() {
   const params = useLocation();
   const [currentSessionDetails, setCurrentSessionDetails] =
     useState<SeatParams>();
   const [disabledButton, setDisabledButton] = useState<boolean>(true);
-  const { chairs = [] } = useSelector((state: RootState) => state.chairsSlice);
+  const [chairs, setChairs] = useState<SeatsInterface[]>([]);
 
   useEffect(() => {
     if (params?.state) {
@@ -100,6 +98,8 @@ export default function Room() {
                 <ComponentSeats
                   seats={seats ? seats : []}
                   letters={letters?.join("")}
+                  chairs={chairs}
+                  setChairs={setChairs}
                 />
               </div>
               <div className="queue">
