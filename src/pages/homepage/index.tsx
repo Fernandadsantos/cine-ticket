@@ -4,10 +4,12 @@ import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovie } from "../../redux/slicesReducers/movieSlice";
-import { Grid, Skeleton } from "@mui/material";
+import { Box, Fab, Skeleton } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import Header from "../../components/header";
 import Poster from "../../components/poster";
 import { Movie } from "../../interfaces";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import "./homepage.css";
 
 export default function HomePage() {
@@ -15,6 +17,7 @@ export default function HomePage() {
     (state: RootState) => state.movieSlice
   );
   const [moviesList, setMoviesList] = useState<Movie[]>([]);
+  const [isVisible, setIsVisible] = useState(false);
   const dispatch = useDispatch<ThunkDispatch<RootState, any, AnyAction>>();
   const navigate = useNavigate();
   const skeletonArray: number[] = Array.from({ length: 20 }, (v, k) => k);
@@ -46,17 +49,42 @@ export default function HomePage() {
     });
   };
 
+  useEffect(() => {
+    const toggleVisibility = () => {
+      setIsVisible(window.scrollY > 300);
+    };
+
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div>
       <Header />
       <main>
+        <div
+          className="floating-btn"
+          style={{ display: isVisible ? "flex" : "none" }}
+        >
+          <Fab
+            sx={{ backgroundColor: "#a32121" }}
+            aria-label="add"
+            onClick={() => scrollToTop()}
+          >
+            <KeyboardArrowUpIcon sx={{ height: "30px", width: "30px" }} />
+          </Fab>
+        </div>
         <h1 className="homepage-title">Filmes em cartaz</h1>
         <div className="containerMovies">
           <Grid container spacing={8} justifyContent="center">
             {loadingMovie !== "succeeded"
               ? skeletonArray.map((e) => {
                   return (
-                    <Grid item>
+                    <Grid>
                       <div>
                         <Skeleton
                           className="skeleton-poster"
@@ -74,7 +102,7 @@ export default function HomePage() {
                 moviesList.map((movie: Movie) => {
                   if (movie.poster !== "") {
                     return (
-                      <Grid item>
+                      <Grid>
                         <div
                           onClick={() =>
                             paramsToSession(
