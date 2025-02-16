@@ -4,7 +4,7 @@ import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovie } from "../../redux/slicesReducers/movieSlice";
-import { Box, Fab, Skeleton } from "@mui/material";
+import { Fab, Skeleton } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Header from "../../components/header";
 import Poster from "../../components/poster";
@@ -104,14 +104,14 @@ export default function HomePage() {
                     return (
                       <Grid>
                         <div
-                          onClick={() =>
+                          onClick={() => {
                             paramsToSession(
                               movie.id,
                               movie.title,
                               movie.poster,
                               movie.overview
-                            )
-                          }
+                            );
+                          }}
                         >
                           <Poster
                             poster_path={movie.poster}

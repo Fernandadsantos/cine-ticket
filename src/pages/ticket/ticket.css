@@ -1,0 +1,132 @@
+.ticket-container{
+    display: flex; 
+    justify-content: space-around; 
+}
+
+.ticket-bottom{ 
+    border-radius: 30px;
+    background-color: #5f0909;
+    width: 380px;
+    height: 200px; 
+}
+
+.ticket-top{
+    border-radius: 30px; 
+    background-color: #fcfcfc;
+    width: 380px;
+    height: 470px; 
+    color: #000;
+}
+
+.label, .subtitle, .label-num{
+    font-size: 17px;
+    font-weight: 500;
+    color: #9e9e9e; 
+    width: max-content;
+    text-align: start;
+    text-transform: uppercase;
+}
+
+.label-num{
+    font-weight: 400;
+    width: 100%;
+    text-align:center;
+}
+
+.subtitle {
+    width: 100%;
+    text-align: center;
+} 
+
+.title{
+    color: #a32121;
+    font-size: 38px; 
+}
+
+.div-details{  
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sub-div-details{
+    display: flex; 
+    flex-direction: column;  
+    gap: 15px;
+    padding-bottom: 50px; 
+    width: 50px;   
+} 
+
+.value,.value-num{
+    width: 85px;
+    font-weight: bold;
+    font-size: 20px;  
+    text-align: start;
+}
+
+.value-num{
+    width: 100%;
+    text-align:center;
+}
+
+.div-room-details{
+    display: flex;  
+    justify-content: start;   
+    padding-left: 35px;  
+    gap: 20%; 
+}
+
+.div-number-ticket{
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+    text-align: center; 
+}
+
+.detail-top{   
+    font-weight: bold;
+    color: #a32121; 
+    font-size: 29px;
+    letter-spacing: 10px;
+    text-align: center;
+    padding: 0 0 20px 0;
+    margin: 0;
+} 
+
+.data-container{  
+    margin: auto;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 90%;
+    justify-content: space-around; 
+    height: 100%; 
+}
+
+.data{   
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-around; 
+    gap: 30px;
+    width: 60%;
+    height: 80%; 
+}
+
+.data-div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 60%; 
+}
+
+.data-label{
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.data-value{
+    font-weight: bold;
+    font-size: 18px;
+}

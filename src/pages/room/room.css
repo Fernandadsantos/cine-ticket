@@ -116,7 +116,10 @@
     height: 30px; 
     border: none;
     border-radius: 10px;      
-    background-color: #787272; 
+    background-color: #787272;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .seats-exemple{

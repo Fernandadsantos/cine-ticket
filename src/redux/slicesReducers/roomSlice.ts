@@ -27,6 +27,7 @@ const createSeats = () => {
         seat: i,
         line: String.fromCharCode(currentLetter),
         status: "available",
+        id: `${String.fromCharCode(currentLetter)}${i}`,
       });
     } else {
       seatsArr.push({
@@ -35,6 +36,9 @@ const createSeats = () => {
           i % 10 === 0 ? currentLetter++ : currentLetter
         ),
         status: "available",
+        id: `${String.fromCharCode(
+          i % 10 === 0 ? currentLetter++ : currentLetter
+        )}${i}`,
       });
     }
   }
@@ -81,7 +85,6 @@ export const fetchRooms = createAsyncThunk(
 
         currentMovie === 19 ? (currentMovie = 0) : (currentMovie += 1);
       }
-      aux.push();
       await addRoom(room.id as string, aux as RoomSchedule[]);
     }
 

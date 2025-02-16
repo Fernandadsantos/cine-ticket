@@ -1,3 +1,6 @@
+import { SvgIconTypeMap } from "@mui/material";
+import { OverridableComponent } from "@mui/material/OverridableComponent";
+
 export interface Movie {
   poster: string;
   posters: [];
@@ -96,12 +99,14 @@ export interface SeatParams {
   idRoom: string;
   schedule: string;
   seats: SeatsInterface[];
+  selectedSeats?: SeatsInterface[];
 }
 
 export interface SeatsInterface {
   seat?: number;
   line?: string;
   status?: string;
+  id: string;
 }
 
 export interface Seats {
@@ -125,4 +130,13 @@ export interface RoomParams {
 export interface SeatProps {
   handleChange: Function;
   row: SeatsInterface;
+}
+
+export interface StepProps {
+  label: string;
+  icon: OverridableComponent<SvgIconTypeMap<{}, "svg">>;
+}
+
+export interface HeaderProps {
+  stepsCompleted?: number;
 }

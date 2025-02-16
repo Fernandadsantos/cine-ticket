@@ -21,7 +21,7 @@ export default function Session() {
 
   return (
     <div>
-      <Header />
+      <Header stepsCompleted={1} />
       <main className="session">
         <h1 className="movieTitle">{currentMovie?.title}</h1>
         <div className="details">

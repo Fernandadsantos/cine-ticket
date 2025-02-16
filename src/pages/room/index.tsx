@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { SeatParams, SeatsInterface } from "../../interfaces";
+import { FormatDate, SeatParams, SeatsInterface } from "../../interfaces";
 import { Button } from "@mui/material";
 import ComponentSeats from "../../components/ComponentSeats";
 import Header from "../../components/header";
+import ClearIcon from "@mui/icons-material/Clear";
+import { useNavigate } from "react-router-dom";
 import "./room.css";
 
 export default function Room() {
@@ -12,6 +14,7 @@ export default function Room() {
     useState<SeatParams>();
   const [disabledButton, setDisabledButton] = useState<boolean>(true);
   const [chairs, setChairs] = useState<SeatsInterface[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (params?.state) {
@@ -55,9 +58,31 @@ export default function Room() {
     }
   }, [chairs]);
 
+  const paramsToTicket = (
+    chairs: SeatsInterface[],
+    idMovie: string,
+    title: string,
+    date: FormatDate[],
+    idRoom: string,
+    schedule: string,
+    seats: SeatsInterface[]
+  ) => {
+    navigate("/session/room/ticket", {
+      state: {
+        idMovie,
+        title,
+        date,
+        idRoom,
+        schedule,
+        seats,
+        chairs,
+      },
+    });
+  };
+
   return (
     <div>
-      <Header />
+      <Header stepsCompleted={2} />
       <main className="room">
         <h1 className="page_title">Escolha seu assento</h1>
         <div className="room_details">
@@ -116,13 +141,36 @@ export default function Room() {
             <div className="seats-exemple">
               <div className="available-seat-exemple"></div>
               <p>Disponível</p>
-              <div className="unAvailable-seat-exemple"></div>
+              <div className="unAvailable-seat-exemple">
+                <ClearIcon sx={{ color: "#000" }} />
+              </div>
               <p>Indisponível</p>
             </div>
           </div>
         </div>
         <div className="btn-continue">
-          <Button disabled={disabledButton} variant="contained" size="large">
+          <Button
+            disabled={disabledButton}
+            size="large"
+            variant="contained"
+            sx={{
+              backgroundColor: "#a32121",
+              color: " #fff ",
+            }}
+            onClick={() => {
+              if (currentSessionDetails !== null) {
+                paramsToTicket(
+                  chairs,
+                  currentSessionDetails?.idMovie as string,
+                  currentSessionDetails?.title as string,
+                  currentSessionDetails?.date as FormatDate[],
+                  currentSessionDetails?.idRoom as string,
+                  currentSessionDetails?.schedule as string,
+                  currentSessionDetails?.seats as SeatsInterface[]
+                );
+              }
+            }}
+          >
             Comprar
           </Button>
         </div>

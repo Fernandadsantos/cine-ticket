@@ -13,7 +13,10 @@ export const chairsSlice = createSlice({
       state.chairs?.push(actions.payload);
     },
     removeChairs: (state, actions) => {
-      state.chairs?.splice(state.chairs?.indexOf(actions.payload), 1);
+      const index = state.chairs?.indexOf(actions.payload);
+      if (index) {
+        state.chairs?.splice(state.chairs?.indexOf(actions.payload), 1);
+      }
     },
   },
 });
