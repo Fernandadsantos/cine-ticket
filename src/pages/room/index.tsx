@@ -69,13 +69,13 @@ export default function Room() {
   ) => {
     navigate("/session/room/ticket", {
       state: {
+        chairs,
         idMovie,
         title,
         date,
         idRoom,
         schedule,
         seats,
-        chairs,
       },
     });
   };

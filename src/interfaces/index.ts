@@ -98,8 +98,14 @@ export interface SeatParams {
   date: FormatDate[];
   idRoom: string;
   schedule: string;
-  seats: SeatsInterface[];
-  selectedSeats?: SeatsInterface[];
+  seats?: SeatsInterface[];
+  chairs?: SeatsInterface[];
+}
+
+export interface TicketParams extends SeatParams {
+  chairs: SeatsInterface[];
+  seat?: SeatsInterface;
+  line?: string;
 }
 
 export interface SeatsInterface {
