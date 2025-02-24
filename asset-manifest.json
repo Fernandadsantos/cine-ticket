@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Fernandadsantos/cine-ticket/static/css/main.86571576.css",
+    "main.js": "/Fernandadsantos/cine-ticket/static/js/main.aa46d763.js",
+    "static/js/453.84b72e2c.chunk.js": "/Fernandadsantos/cine-ticket/static/js/453.84b72e2c.chunk.js",
+    "index.html": "/Fernandadsantos/cine-ticket/index.html",
+    "main.86571576.css.map": "/Fernandadsantos/cine-ticket/static/css/main.86571576.css.map",
+    "main.aa46d763.js.map": "/Fernandadsantos/cine-ticket/static/js/main.aa46d763.js.map",
+    "453.84b72e2c.chunk.js.map": "/Fernandadsantos/cine-ticket/static/js/453.84b72e2c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.86571576.css",
+    "static/js/main.aa46d763.js"
+  ]
+}
